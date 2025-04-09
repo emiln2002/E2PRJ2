@@ -1,3 +1,6 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/settings.json
+server_test/client/.vscode/extensions.json
+server_test/client/.vscode/settings.json
+
