@@ -2,7 +2,10 @@
 
 char ui_control::key_input()
 {
-    return 0;
+    char key;
+    std::cin >> key;
+    
+    return key;
 }
 
 void ui_control::mode_selection(int mode)
