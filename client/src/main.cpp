@@ -1,17 +1,25 @@
 #include <Arduino.h>
 #include "client.h"
 
+
 void setup(){
-  client gardin;
+  client gardin(8080, "192.168.8.220");
+  pinMode(2, OUTPUT);
+  digitalWrite(2, HIGH);
+
   while(1){
-    gardin.read();
+    String read = gardin.read();
+    if (read == "on") digitalWrite(2, HIGH);
+    else if (read == "off") digitalWrite(2, LOW);
+    // delay(1000);
+    // gardin.send("55");
+    // delay(1000);
+
   }
 }
 
-void loop(){
-  
+void loop(){}
 
-}
 
 
 

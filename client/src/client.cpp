@@ -1,49 +1,75 @@
 #include "client.h"
 
-client::client(const int port, const char *host_ip, const char *ssid)
-    : port(port), host_ip(host_ip), ssid(ssid)
-{
+client::client(const int port, const char *host_ip, const char *ssid): port(port), host_ip(host_ip), ssid(ssid){
     Serial.begin(9600);
 
-    WiFi.begin(ssid);
+    // WiFi.begin(ssid);
+    WiFi.begin("ThePromisedLan", "12345678");
+    
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
         Serial.println("...");
     }
 
-    Serial.print("WiFi connected with IP: ");
-
-    Serial.println(WiFi.localIP());
+    Serial.println("WiFi connected");
 }
 
-String client::read()
-{
-    while (data_recieved == ""){
-        WiFiClient client;
-
-        while (!client.connect(host_ip, port)) {
-
-            Serial.println("Connection to host failed");
-
-            delay(1000);
-        }
-        
-
-        Serial.println("Connected to server successful!");
-
-        delay(1000);
-        client.println("Hello from ESP32");
-        delay(500);
-        if (client.available()) {
-            String c = client.readString();
-            Serial.println(c);
-            data_recieved = c;
-        }
-        else Serial.println("no data available");
-        
-        Serial.println("Disconnecting...");
-        client.stop();
-        
+void client::send(String data){
+    WiFiClient client;
+    while (!client.connect(host_ip, port)) {
+        Serial.println("Connection failed");
+        delay(100);
     }
-        return data_recieved;
+    client.println(data);
+    client.flush();
+    delay(100);  // give server a moment to process
+    client.stop();
+
+}
+
+String client::read() {
+    String data_received = "";
+
+    WiFiClient client;
+
+    while (!client.connect(host_ip, port)) {
+        Serial.println("Connection failed");
+        delay(100);
+    }
+
+    Serial.println("Connected to server");
+
+    // Step 1: Send REQUEST to the server
+    client.println("101");
+    client.flush();
+    Serial.println("Sent 101 to server");
+
+    // Step 2: Wait for the response from the server
+    unsigned long timeout = millis();
+    while (!client.available()) {
+        if (millis() - timeout > 5000) {
+            Serial.println("Timeout waiting for response");
+            client.stop();
+            return "";
+        }
+        delay(10);
+    }
+
+    // Step 3: Read the response from the server
+    data_received = client.readStringUntil('\n');
+    data_received.trim();  // remove any trailing \r or \n
+    Serial.print("Received state: ");
+    Serial.println(data_received);
+
+    // Step 4: Send 102 to the server to acknowledge receipt
+    delay(100);  // short delay before 102
+    client.println("102");
+    client.flush();
+    Serial.println("Sent 102 to server");
+
+    // Step 5: Cleanly close the connection
+    delay(100);  // give server a moment to process
+    client.stop();
+
+    return data_received;
 }

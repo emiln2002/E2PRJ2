@@ -11,7 +11,6 @@ private:
     const char* ssid;
 
     String data_send;
-    String data_recieved = "";
     
 public:
     client(const int port = 8080, const char * host_ip = "10.42.0.1", const char* ssid = "smart");
