@@ -2,7 +2,7 @@
 #include "light_control.h"
 #include "../../wifi_client/client.h"
 
-client myClient(8080, "10.42.0.1", "smart");
+client myClient(8081, "10.133.43.160", "smart");
 light_control lightController;
 
 void setup() {

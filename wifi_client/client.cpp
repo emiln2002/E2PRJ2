@@ -3,7 +3,8 @@
 client::client(const int port, const char *host_ip, const char *ssid): port(port), host_ip(host_ip), ssid(ssid){
     Serial.begin(9600);
 
-    WiFi.begin(ssid);
+    WiFi.begin("Silas Iphone", "12345678");
+    //WiFi.begin(ssid);
     
     
     while (WiFi.status() != WL_CONNECTED) {
