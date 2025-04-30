@@ -1,11 +1,12 @@
 from UI_package import Menu
 from server_package import Server
+import os
 
 menu = Menu
 
-menu.menu()
 
-gardin = Server("gardin")
+os.system('clear')
+menu.main_menu()
 
 
 
