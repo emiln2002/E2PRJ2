@@ -1,18 +1,31 @@
 #include <Arduino.h>
+#include "light_control.h"
+#include "../../wifi_client/client.h"
 
-// put function declarations here:
-int myFunction(int, int);
+client myClient(8080, "10.42.0.1", "smart");
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+    Serial.begin(115200);
+    initLightControl();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+    String inputStr = myClient.read();  // Hent værdi som string
+    Serial.print("Modtaget data: ");
+    Serial.println(inputStr);
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+    if (inputStr.length() > 0) {
+        int value = inputStr.toInt();
+        value = constrain(value, 0, 100);
+
+        if (value == 0) {
+            turn_off();
+        } else if (value == 100) {
+            turn_on();
+        } else {
+            adjust_level(value);
+        }
+    }
+
+    delay(1000);  // Vent lidt inden næste opdatering
 }
