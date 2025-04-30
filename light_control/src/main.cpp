@@ -3,10 +3,11 @@
 #include "../../wifi_client/client.h"
 
 client myClient(8080, "10.42.0.1", "smart");
+light_control lightController;
 
 void setup() {
     Serial.begin(115200);
-    initLightControl();
+    lightController.init();
 }
 
 void loop() {
@@ -19,11 +20,11 @@ void loop() {
         value = constrain(value, 0, 100);
 
         if (value == 0) {
-            turn_off();
+            lightController.turn_off();
         } else if (value == 100) {
-            turn_on();
+            lightController.turn_on();
         } else {
-            adjust_level(value);
+            lightController.adjust_level(value);
         }
     }
 
