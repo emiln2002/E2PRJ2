@@ -4,7 +4,7 @@ client::client(const int port, const char *host_ip, const char *ssid): port(port
     Serial.begin(9600);
 
     // WiFi.begin(ssid);
-    WiFi.begin("Silas iPhone", "12345678");
+    WiFi.begin("ThePromisedLan", "12345678");
     
     
     while (WiFi.status() != WL_CONNECTED) {

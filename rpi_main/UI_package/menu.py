@@ -3,13 +3,13 @@ class Menu:
     def __init__(self):
         self.mode = "Auto"
         print("initialised")
-        self.ascii_title = r"""
-   _____                      __     __              
-  / ___/____ ___  ____ ______/ /_   / /   __  _______
-  \__ \/ __ `__ \/ __ `/ ___/ __/  / /   / / / / ___/
- ___/ / / / / / / /_/ / /  / /_   / /___/ /_/ (__  ) 
-/____/_/ /_/ /_/\__,_/_/   \__/  /_____/\__, /____/  
-                                       /____/        
+        self.title = r"""
+      _____                      __     __              
+     / ___/____ ___  ____ ______/ /_   / /   __  _______
+     \__ \/ __ `__ \/ __ `/ ___/ __/  / /   / / / / ___/
+    ___/ / / / / / / /_/ / /  / /_   / /___/ /_/ (__  ) 
+   /____/_/ /_/ /_/\__,_/_/   \__/  /_____/\__, /____/  
+                                          /____/        
         """
 
 
@@ -26,14 +26,15 @@ class Menu:
             "  1. Skift mode",
             "  2. Styr lys manuelt",
             "  3. Styr lys autonomt",
-            "  4. Vis data"
+            "  4. Vis data",
+            "  5. Server log"
         )
 
-        print(self.ascii_title)
-        print(f"MODE: {self.mode}".center(54, "-"))
+        print(self.title)
+        print(f"MODE: {self.mode}".center(60, "-"))
         for option in menu_options:
             print(option)
-        print("-" * 54)
+        print("-" * 60)
 
 
 # ----------------------styr lys auto----------------------
@@ -48,11 +49,11 @@ class Menu:
             "  x. Hovedmenu"
         )
 
-        print(self.ascii_title)
-        print("STYR LYS AUTO".center(54, "-"))
+        print(self.title)
+        print("STYR LYS AUTO".center(60, "-"))
         for option in menu_options:
             print(f"{option}")
-        print("-" * 54)
+        print("-" * 60)
 
 
 # ----------------------styr lys manuelt----------------------
@@ -60,14 +61,63 @@ class Menu:
     def manuelt_menu(self):
 
         menu_options = (
-            "  1. Tænd/sluk lys",
-            "  2. Åben/luk gardin",
+            "  1. Tænd lys",
+            "  2. Sluk lys",
+            "  3. Åben/luk gardin",
             "",
             "  x. Hovedmenu"
         )
-        print(self.ascii_title)
-        print("STYR LYS MANUELT".center(54, "-"))
+        print(self.title)
+        print("STYR LYS MANUELT".center(60, "-"))
         for option in menu_options:
             print(f"{option}")
-        print("-" * 54)
-    
+        print("-" * 60)
+        
+        
+# ----------------------styr lys manuelt----------------------
+
+    def data_menu(self):
+        
+        title = r"""
+    _____ __                      __   ____        __       
+   / ___// /_____  ________  ____/ /  / __ \____ _/ /_____ _
+   \__ \/ __/ __ \/ ___/ _ \/ __  /  / / / / __ `/ __/ __ `/
+  ___/ / /_/ /_/ / /  /  __/ /_/ /  / /_/ / /_/ / /_/ /_/ / 
+ /____/\__/\____/_/   \___/\__,_/  /_____/\__,_/\__/\__,_/                    
+        """
+
+        print(title)
+        
+        gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
+        self.graph(gr,"OUTSIDE LIGHT LEVEL")
+        
+        print("-" * 60)
+        
+        
+        
+# ----------------------graph----------------------
+    def graph(self,lis:list,name):
+        li = lis
+        while len(li) < 50:
+            li.append(0)
+        while len(li) > 50:
+            li.pop(0)
+        
+        print(("┌─" + "─" * len(name) + "─┐").center(60, " "))
+        print("┌", end="")
+        print(f"┤ {name} ├".center(58, "─"), end="")
+        print("┐")
+        print("│", end="")
+        print(("└─" + "─" * len(name) + "─┘").center(58, " "), end="")
+        print("│")
+        
+        for x in reversed(range(1,11)):
+            if x == 10: print(f"│ {x}", end="│")
+            else: print(f"│  {x}", end="│")
+            for i in li:
+                if i==x: print("—", end="")
+                else: print(" ", end="")
+            print("    │")
+        print("│   └", end="")
+        print("─" * 50 + "    │")
+        print("└" + "─" * 58 + "┘")

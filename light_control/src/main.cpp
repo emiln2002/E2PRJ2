@@ -2,7 +2,10 @@
 #include "light_control.h"
 #include "client.h"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 client myClient(8081, "10.133.43.160", "smart");
 light_control lightController;
 
