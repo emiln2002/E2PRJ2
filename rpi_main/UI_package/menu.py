@@ -19,7 +19,7 @@ class Menu:
         else: self.mode = "Auto"
 
 # ----------------------hovedmenu----------------------
-    def main_menu(self):  # Note the 'self' parameter
+    def main_menu(self):
         
         menu_options = (
             "HOVEDMENU:",
@@ -61,8 +61,8 @@ class Menu:
     def manuelt_menu(self):
 
         menu_options = (
-            "  1. Tænd lys",
-            "  2. Sluk lys",
+            "  1. Tænd/Sluk lys",
+            "  2. Juster lys niveau",
             "  3. Åben/luk gardin",
             "",
             "  x. Hovedmenu"
@@ -74,9 +74,9 @@ class Menu:
         print("-" * 60)
         
         
-# ----------------------styr lys manuelt----------------------
+# ----------------------vis data----------------------
 
-    def data_menu(self):
+    def data_menu(self, udelys):
         
         title = r"""
     _____ __                      __   ____        __       
@@ -87,9 +87,11 @@ class Menu:
         """
 
         print(title)
+        print("DEVICES".center(60, "-"))
+        print(f"Udelys: {udelys}")
         
         gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
-        self.graph(gr,"OUTSIDE LIGHT LEVEL")
+        self.graph(gr,"OUTSIDE LIGHT")
         
         print("-" * 60)
         

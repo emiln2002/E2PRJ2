@@ -6,19 +6,22 @@ import threading
 
 menu = Menu()
 
-myserver = Server()
+lys_server = Server(8081)
+gardin_server = Server(8082)
 
-myserver.set_massege("on")
+lys_server.set_massege("100")
 
-t1 = threading.Thread(target=myserver.send, args=())
-t1.start()
+threading.Thread(target=lys_server.run, args=()).start()
+threading.Thread(target=gardin_server.run, args=()).start()
+# t1.start()
+# t2.start()
 
 while True:
     os.system('clear')
     menu.main_menu()
     x = input("Indtast valg: ")
     if x == "x":
-        myserver.setLog(False)
+        lys_server.setLog(False)
         os.system('clear')
         menu.main_menu()
     elif x == "1":
@@ -33,8 +36,20 @@ while True:
             menu.manuelt_menu()
             x = input("Indtast valg: ")
             if x == "x": break
-            elif x == "1": myserver.set_massege("on")
-            elif x == "2": myserver.set_massege("off")
+            elif x == "1": 
+                if lys_server.message == ("100"):
+                    lys_server.set_massege("0")
+                else: lys_server.set_massege("100")
+            elif x == "2":
+                os.system('clear')
+                menu.manuelt_menu()
+                i = input("Indtast værdi for lys fra 0-100: ")
+                lys_server.set_massege(i)
+            elif x == "3": 
+                if gardin_server.message == ("100"):
+                    gardin_server.set_massege("0")
+                else: gardin_server.set_massege("100")
+            
 
 # ----------------------styr lys auto-------------------------
     elif x == "3":
@@ -48,7 +63,7 @@ while True:
     elif x == "4":
         while True:
             os.system('clear')
-            menu.data_menu()
+            menu.data_menu(gardin_server.recieve)
             x = input("Indtast valg: ")
             if x == "x": break
             
@@ -56,7 +71,7 @@ while True:
 # ----------------------Server log----------------------------
     elif x == "5":
         os.system('clear')
-        myserver.setLog(True)
+        lys_server.setLog(True)
     
     
     
