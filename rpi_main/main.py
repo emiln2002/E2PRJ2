@@ -9,6 +9,7 @@ menu = Menu()
 lys_server = Server(8081)
 gardin_server = Server(8082)
 
+
 lys_server.set_massege("100")
 
 threading.Thread(target=lys_server.run, args=()).start()

@@ -3,8 +3,8 @@
 client::client(const int port, const char *host_ip, const char *ssid): port(port), host_ip(host_ip), ssid(ssid){
     Serial.begin(9600);
 
-    WiFi.begin("Silas Iphone", "12345678");
-    //WiFi.begin(ssid);
+    
+    WiFi.begin(ssid);
     
     
     while (WiFi.status() != WL_CONNECTED) {
@@ -16,16 +16,7 @@ client::client(const int port, const char *host_ip, const char *ssid): port(port
 }
 
 void client::send(String data){
-    WiFiClient client;
-    while (!client.connect(host_ip, port)) {
-        Serial.println("Connection failed");
-        delay(100);
-    }
-    client.println(data);
-    client.flush();
-    delay(100);  // give server a moment to process
-    client.stop();
-
+    data_send = data;
 }
 
 String client::read() {
@@ -41,9 +32,9 @@ String client::read() {
     Serial.println("Connected to server");
 
     // Step 1: Send REQUEST to the server
-    client.println("101");
+    client.println(data_send);
     client.flush();
-    Serial.println("Sent 101 to server");
+    Serial.println("Sent data_send to server");
 
     // Step 2: Wait for the response from the server
     unsigned long timeout = millis();
