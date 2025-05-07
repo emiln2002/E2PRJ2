@@ -86,6 +86,7 @@ while True:
             os.system('clear')
             log_database.save_log("INFO", "TEST")
             logs = log_database.get_logs("DESC")
+            print("__________LOGS__________")
             for row in logs:
                 print(f"[{row[1]}] ({row[2]}) {row[3]}")
             x = input("Indtast valg: ")
