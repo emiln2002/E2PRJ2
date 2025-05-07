@@ -81,13 +81,15 @@ while True:
 
 # ----------------------Server log----------------------------
     elif x == "5":
-        os.system('clear')
-        log_database.save_log("INFO", "TEST")
-        logs = log_database.get_logs("DESC")
-        for row in logs:
-            print(f"[{row[1]}] ({row[2]}) {row[3]}")
-        x = input("Indtast valg: ")
-        if x == "x": break
+        while True:
+            
+            os.system('clear')
+            log_database.save_log("INFO", "TEST")
+            logs = log_database.get_logs("DESC")
+            for row in logs:
+                print(f"[{row[1]}] ({row[2]}) {row[3]}")
+            x = input("Indtast valg: ")
+            if x == "x": break
     
     
 
