@@ -3,7 +3,7 @@
 
 
 void setup(){
-  client gardin(8082, "192.168.8.220");
+  client gardin(8082);
   gardin.send("En lille besked om udelys");
 
   pinMode(2, OUTPUT);

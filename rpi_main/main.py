@@ -3,19 +3,17 @@ from server_package import Server
 import os
 import threading
 
-
 menu = Menu()
 
 lys_server = Server(8081)
 gardin_server = Server(8082)
+sensor_server = Server(8083)
 
-
-lys_server.set_massege("100")
 
 threading.Thread(target=lys_server.run, args=()).start()
 threading.Thread(target=gardin_server.run, args=()).start()
-# t1.start()
-# t2.start()
+threading.Thread(target=sensor_server.run, args=()).start()
+
 
 while True:
     os.system('clear')
