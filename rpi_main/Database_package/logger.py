@@ -2,9 +2,14 @@ import sqlite3
 from datetime import datetime
 
 class Database:
+
+    def __init__(self, db_path):
+        self.db_path = db_path
+        self.create_database()
+
     #funktion til at oprette database og tabellen
-    def create_database(db_path):
-        conn = sqlite3.connect(db_path)
+    def create_database(self):
+        conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
         c.execute('''
             CREATE TABLE IF NOT EXISTS logs (
@@ -18,16 +23,16 @@ class Database:
         conn.close()
 
     #funktion til at gemme en log
-    def save_log(db_path, level, message):
-        conn = sqlite3.connect(db_path)
+    def save_log(self, level, message):
+        conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
         c.execute("INSERT INTO logs (timestamp, level, message) VALUES (?, ?, ?)",(datetime.now().isoformat(),level,message))
         conn.commit()
         conn.close()
 
     # Funktion til at vise alle logs
-    def get_logs(db_path, order="DESC"):
-        conn = sqlite3.connect(db_path)
+    def get_logs(self, order):
+        conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
         c.execute(f"SELECT * FROM logs ORDER BY timestamp {order}")
         rows = c.fetchall()

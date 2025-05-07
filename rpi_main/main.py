@@ -1,13 +1,15 @@
 from UI_package import Menu
 from server_package import Server
+from Database_package import Database
 import os
 import threading
 
 menu = Menu()
-
+db_path = "/home/E2PI/Documents/database/logs.db"
 lys_server = Server(8081)
 gardin_server = Server(8082)
 sensor_server = Server(8083)
+log_database = Database(db_path)
 
 
 threading.Thread(target=lys_server.run, args=()).start()
@@ -70,8 +72,10 @@ while True:
 # ----------------------Server log----------------------------
     elif x == "5":
         os.system('clear')
-        lys_server.setLog(True)
-    
+        log_database.save_log("INFO", "TEST")
+        logs = log_database.get_logs("DESC")
+        for row in logs:
+            print(f"[{row[1]}] ({row[2]}) {row[3]}")
     
     
 
