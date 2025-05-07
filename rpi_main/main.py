@@ -5,9 +5,9 @@ import threading
 
 menu = Menu()
 
-lys_server = Server(8084)
-gardin_server = Server(8085)
-sensor_server = Server(8086)
+lys_server = Server(8081)
+gardin_server = Server(8082)
+sensor_server = Server(8083)
 
 
 threading.Thread(target=lys_server.run, args=()).start()
