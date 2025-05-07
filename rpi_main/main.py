@@ -2,12 +2,13 @@ from UI_package import Menu
 from server_package import Server
 import os
 import threading
+import time
 
 menu = Menu()
 
-lys_server = Server(8081)
-gardin_server = Server(8082)
-sensor_server = Server(8083)
+lys_server = Server(8085)
+gardin_server = Server(8087)
+sensor_server = Server(8084)
 
 
 threading.Thread(target=lys_server.run, args=()).start()
@@ -15,15 +16,17 @@ threading.Thread(target=gardin_server.run, args=()).start()
 threading.Thread(target=sensor_server.run, args=()).start()
 
 
-def run_mode():
-    while menu.mode == "Auto":
-        lys_server.set_massege(sensor_server.recieve)
-        if gardin_server.recieve > 50:
-            gardin_server.set_massege("1")
-        else: gardin_server.set_massege("0")
-        print("running")
+def run_auto():
+    while True:
+        while menu.get_mode() == "Auto":
+            if lys_server.log: print("Auto mode running")
+            lys_server.set_massege(sensor_server.recieve)
+            if int(gardin_server.recieve) > 50:
+                gardin_server.set_massege("1")
+            else: gardin_server.set_massege("0")
+            time.sleep(1)
         
-threading.Thread(target=run_mode, args=()).start()
+threading.Thread(target=run_auto, args=()).start()
 
 while True:
     os.system('clear')
@@ -72,12 +75,21 @@ while True:
    
 # ----------------------Vis data -----------------------------
     elif x == "4":
+        show_state = True
         while True:
+            def run_data():
+                while True:
+                    while show_state:
+                        os.system('clear')
+                        menu.data_menu(gardin_server.recieve, sensor_server.recieve, lys_server.message, gardin_server.message)
+                        print("x. Hovedmenu")
+                        time.sleep(1)
             
-            os.system('clear')
-            menu.data_menu(gardin_server.recieve, sensor_server.recieve)
-            x = input("Indtast valg: ")
-            if x == "x": break
+            threading.Thread(target=run_data, args=()).start()
+            x = input()
+            if x == "x": 
+                show_state=False
+                break
             
 
 # ----------------------Server log----------------------------

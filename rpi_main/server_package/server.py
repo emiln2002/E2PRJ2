@@ -5,7 +5,7 @@ class Server:
     def __init__(self, port):
         self.message = ""
         self.log = False
-        self.recieve = "-"
+        self.recieve = "-1"
 
         if self.log: print("server initialiseret")
         self.serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

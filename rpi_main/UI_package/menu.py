@@ -17,6 +17,10 @@ class Menu:
         if self.mode == "Auto":
             self.mode = "Manuel"
         else: self.mode = "Auto"
+    
+    def get_mode(self): 
+        return self.mode
+        
 
 # ----------------------hovedmenu----------------------
     def main_menu(self):
@@ -76,7 +80,7 @@ class Menu:
         
 # ----------------------vis data----------------------
 
-    def data_menu(self, udelys, indelys):
+    def data_menu(self, udelys, indelys, lys, gardin):
         
         title = r"""
     _____ __                      __   ____        __       
@@ -88,8 +92,10 @@ class Menu:
 
         print(title)
         print("DEVICES".center(60, "-"))
-        print(f"Udelys: {udelys}")
-        print(f"Indelys: {indelys}")
+        print(f"  Udelys:     {udelys}")
+        print(f"  Indelys:    {indelys}")
+        print(f"  Lys niveau: {lys}")
+        print(f"  Gardin:     {gardin}")
         
         gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
         self.graph(gr,"OUTSIDE LIGHT")
