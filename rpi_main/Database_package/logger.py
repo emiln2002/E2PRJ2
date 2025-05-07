@@ -38,4 +38,3 @@ class Database:
         rows = c.fetchall()
         conn.close()
         return rows
-
