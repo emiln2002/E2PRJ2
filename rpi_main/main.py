@@ -86,6 +86,8 @@ while True:
         logs = log_database.get_logs("DESC")
         for row in logs:
             print(f"[{row[1]}] ({row[2]}) {row[3]}")
+        x = input("Indtast valg: ")
+        if x == "x": break
     
     
 
