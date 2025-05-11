@@ -5,7 +5,8 @@ import os
 import threading
 
 menu = Menu()
-db_path = "/home/E2PI/Documents/database/logs.db"
+db_path = os.path.join(os.path.dirname(__file__), "logs.db")
+#db_path = "/home/E2PI/Documents/database/logs.db"
 lys_server = Server(8081)
 gardin_server = Server(8082)
 sensor_server = Server(8083)
@@ -19,8 +20,8 @@ threading.Thread(target=sensor_server.run, args=()).start()
 
 def run_mode():
     while menu.mode == "Auto":
-        lys_server.set_message(sensor_server.recieve)
-        if gardin_server.recieve > 50:
+        lys_server.set_message(sensor_server.receive)
+        if gardin_server.receive > 50:
             gardin_server.set_message("1")
         else: gardin_server.set_message("0")
         
@@ -74,7 +75,7 @@ while True:
         while True:
             
             os.system('clear')
-            menu.data_menu(gardin_server.recieve,sensor_server.recieve)
+            menu.data_menu(gardin_server.receive,sensor_server.receive)
             x = input("Indtast valg: ")
             if x == "x": break
             
@@ -89,7 +90,7 @@ while True:
             print("__________LOGS__________")
             for row in logs:
                 print(f"[{row[1]}] ({row[2]}) {row[3]}")
-            x = input("Indtast valg: ")
+            x = input("Indtast valg - Tast x for at gå tilbage: ")
             if x == "x": break
     
     
