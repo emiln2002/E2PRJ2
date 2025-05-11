@@ -22,6 +22,42 @@ bool kamera_driver::person_detected()
     else {return false;}
 }
 
+
+bool kamera_driver::area_mode(){
+  getFrame(pixel_temps);
+  int current_pixel_chain = 0;
+  for (size_t i = 0; i < 768; i++)
+  {
+    if(pixel_temps[i]> detecting_temp_){
+      current_pixel_chain++;
+
+    }
+    else{
+      current_pixel_chain = 0;
+    }
+    
+    if(current_pixel_chain == square_sidelength_){
+      if(check_following_lines(i + 33 - square_sidelength_)){
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+bool kamera_driver::check_following_lines(int start){
+  
+  for(auto k = 0; k < square_sidelength_-1; k++) { //Ydre loop - styrer antallet af linjer under
+    for(auto i = start; i < start + square_sidelength_; i++){ //gennemløber pixels på en linje
+      if(pixel_temps[i]<detecting_temp_){
+        return false;
+      }
+    }
+    start += 32; //Går til næste linje
+  }
+  return true;
+}
+
 /*
 void kamera_driver::screen_mode()
 {
