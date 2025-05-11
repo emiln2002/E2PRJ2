@@ -16,17 +16,18 @@ class Database:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TEXT,
                 level TEXT,
-                message TEXT
+                message TEXT,
+                value INT
             )
         ''')
         conn.commit()
         conn.close()
 
     #funktion til at gemme en log
-    def save_log(self, level, message):
+    def save_log(self, level, message, value):
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
-        c.execute("INSERT INTO logs (timestamp, level, message) VALUES (?, ?, ?)",(datetime.now().isoformat(),level,message))
+        c.execute("INSERT INTO logs (timestamp, level, message, value) VALUES (?, ?, ?, ?)",(datetime.now().isoformat(),level,message, value))
         conn.commit()
         conn.close()
 

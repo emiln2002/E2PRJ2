@@ -6,7 +6,6 @@ import threading
 
 menu = Menu()
 db_path = os.path.join(os.path.dirname(__file__), "logs.db")
-#db_path = "/home/E2PI/Documents/database/logs.db"
 lys_server = Server(8081)
 gardin_server = Server(8082)
 sensor_server = Server(8083)
@@ -86,10 +85,10 @@ while True:
             
             os.system('clear')
             menu.db_menu()
-            log_database.save_log("INFO", "TEST")
+            log_database.save_log("INFO", "TEST", 5)
             logs = log_database.get_logs("ASC")
             for row in logs:
-                print(f"[{row[1]}] ({row[2]}) {row[3]}")
+                print(f"[{row[1]}] ({row[2]}) {row[3]} {row[4]}")
             x = input("Indtast valg - Tast x for at gå tilbage: ")
             if x == "x": break
     
