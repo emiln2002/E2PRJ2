@@ -27,7 +27,7 @@ class Database:
     def save_log(self, level, message, value):
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
-        c.execute("INSERT INTO logs (timestamp, level, message, value) VALUES (?, ?, ?, ?)",(datetime.now().isoformat(),level,message, value))
+        c.execute("INSERT INTO logs (timestamp, level, message, value) VALUES (?, ?, ?, ?)",(datetime.now().isoformat(),level,message,value))
         conn.commit()
         conn.close()
 
