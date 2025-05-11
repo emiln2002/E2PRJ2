@@ -19,10 +19,10 @@ threading.Thread(target=sensor_server.run, args=()).start()
 
 def run_mode():
     while menu.mode == "Auto":
-        lys_server.set_massege(sensor_server.recieve)
+        lys_server.set_message(sensor_server.recieve)
         if gardin_server.recieve > 50:
-            gardin_server.set_massege("1")
-        else: gardin_server.set_massege("0")
+            gardin_server.set_message("1")
+        else: gardin_server.set_message("0")
         
 threading.Thread(target=run_mode, args=()).start()
 
@@ -48,17 +48,17 @@ while True:
             if x == "x": break
             elif x == "1": 
                 if lys_server.message == ("100"):
-                    lys_server.set_massege("0")
-                else: lys_server.set_massege("100")
+                    lys_server.set_message("0")
+                else: lys_server.set_message("100")
             elif x == "2":
                 os.system('clear')
                 menu.manuelt_menu(lys_server.message, gardin_server.message)
                 i = input("Indtast værdi for lys fra 0-100: ")
-                lys_server.set_massege(i)
+                lys_server.set_message(i)
             elif x == "3": 
                 if gardin_server.message == ("1"):
-                    gardin_server.set_massege("0")
-                else: gardin_server.set_massege("1")
+                    gardin_server.set_message("0")
+                else: gardin_server.set_message("1")
             
 
 # ----------------------styr lys auto-------------------------
