@@ -3,7 +3,6 @@
 .vscode/settings.json
 server_test/client/.vscode/extensions.json
 server_test/client/.vscode/settings.json
-rpi_main/logs.db
-rpi_main/Database_package/__pyacache__
-rpi_main/server_package/__pyacache__
-rpi_main/UI_package/__pyacache__
+logs.db
+__pyacache__/
+*.pyc
