@@ -85,9 +85,9 @@ while True:
         while True:
             
             os.system('clear')
+            menu.db_menu()
             log_database.save_log("INFO", "TEST")
             logs = log_database.get_logs("ASC")
-            print("__________LOGS__________")
             for row in logs:
                 print(f"[{row[1]}] ({row[2]}) {row[3]}")
             x = input("Indtast valg - Tast x for at gå tilbage: ")
