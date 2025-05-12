@@ -26,7 +26,6 @@ def run_data():
             for row in logs:
                 if (row[3] =="OUTSIDE"):
                     gr.append(row[4])
-                    print(row[4])
             print("DEVICES".center(60, "-"))
             menu.graph(gr, "UDELYS")
             time.sleep(2)
