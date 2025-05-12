@@ -3,6 +3,7 @@ from server_package import Server
 from Database_package import Database
 import os
 import threading
+import array
 
 menu = Menu()
 db_path = os.path.join(os.path.dirname(__file__), "logs.db")
@@ -71,27 +72,20 @@ while True:
    
 # ----------------------Vis data -----------------------------
     elif x == "4":
+        gr = []
         while True:
             
             os.system('clear')
             menu.data_menu(gardin_server.receive,sensor_server.receive)
-            x = input("Indtast valg: ")
-            if x == "x": break
-            
-
-# ----------------------Server log----------------------------
-    elif x == "5":
-        while True:
-            
-            os.system('clear')
-            menu.db_menu()
-            log_database.save_log("INFO", "TEST", 5)
+            log_database.save_log("INFO", "CHANGE", 3)
             logs = log_database.get_logs("ASC")
             for row in logs:
-                print(f"[{row[1]}] ({row[2]}) {row[3]} {row[4]}")
-            x = input("Indtast valg - Tast x for at gå tilbage: ")
+                if (row[3] == "INFO"):
+                    gr.append(row[4])
+            print("DEVICES".center(60, "-"))
+            menu.graph(gr, "OUTSIDE LIGHT")
+            x = input("Indtast valg: ")
             if x == "x": break
-    
     
 
 

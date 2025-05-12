@@ -26,8 +26,7 @@ class Menu:
             "  1. Skift mode",
             "  2. Styr lys manuelt",
             "  3. Styr lys autonomt",
-            "  4. Vis data",
-            "  5. Server log"
+            "  4. Vis data"
         )
 
         print(self.title)
@@ -87,27 +86,13 @@ class Menu:
         """
 
         print(title)
-        print("DEVICES".center(60, "-"))
         print(f"Udelys: {udelys}")
         print(f"Indelys: {indelys}")
         
-        gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
-        self.graph(gr,"OUTSIDE LIGHT")
+        #gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
+        #self.graph(gr,"OUTSIDE LIGHT")
         
         print("-" * 60)
-
-# ---------------------- Server Log ----------------------
-    def db_menu(self):
-        title = r"""
-    _____ __                      __   ____        __       
-   / ___// /_____  ________  ____/ /  / __ \____ _/ /_____ _
-   \__ \/ __/ __ \/ ___/ _ \/ __  /  / / / / __ `/ __/ __ `/
-  ___/ / /_/ /_/ / /  /  __/ /_/ /  / /_/ / /_/ / /_/ /_/ / 
- /____/\__/\____/_/   \___/\__,_/  /_____/\__,_/\__/\__,_/                    
-        """
-
-        print(title)
-        
         
 # ----------------------graph----------------------
     def graph(self,lis:list,name):
