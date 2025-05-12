@@ -14,12 +14,15 @@ void setup() {
   Serial.begin(9600); //tilføjet igen for at se i terminal, ved ikke om det skal være der
 
   kamera_driver kamera1(28, 30, 3, 0x33); //Jeg har ændret adressen
-  light_sensor light1(50, 1000);
+
+  int threshold = 450; // skal testes
+
+  light_sensor light1(50, threshold);
   
   
   pinMode(35, INPUT);
   int light_level = 50;
-  int threshold = 500; // skal testes
+  
 
   analogReadResolution(12);
 
