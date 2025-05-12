@@ -17,17 +17,17 @@ show_state = False
 gr = []
 
 def run_data():
-                while True:
-                    while show_state:
-                        os.system('clear')
-                        menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-                        logs = log_database.get_logs("ASC")
-                        for row in logs:
-                            if (row[3] =="TEST"):
-                                gr.append(row[4])
-                        print("DEVICES".center(60, "-"))
-                        menu.graph(gr, "OUTSIDE LIGHT")
-                        time.sleep(1)
+    while True:
+        while show_state:
+            os.system('clear')
+            menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
+            logs = log_database.get_logs("ASC")
+            for row in logs:
+                if (row[3] =="TEST"):
+                    gr.append(row[4])
+            print("DEVICES".center(60, "-"))
+            menu.graph(gr, "OUTSIDE LIGHT")
+            time.sleep(1)
 
 threading.Thread(target=lys_server.run, args=()).start()
 threading.Thread(target=gardin_server.run, args=()).start()
@@ -35,11 +35,14 @@ threading.Thread(target=sensor_server.run, args=()).start()
 threading.Thread(target=run_data, args=()).start()
 
 def run_auto():
-    while menu.mode == "Auto":
-        lys_server.set_message(sensor_server.receive)
-        if int(gardin_server.receive) > 50:
-            gardin_server.set_message("1")
-        else: gardin_server.set_message("0")
+    while True:
+        while menu.get_mode() == "Auto":
+            # print("Auto mode running")
+            lys_server.set_message(sensor_server.receive)
+            if int(gardin_server.receive) > 50:
+                gardin_server.set_message("1")
+            else: gardin_server.set_message("0")
+            time.sleep(1)
         
 threading.Thread(target=run_auto, args=()).start()
 
