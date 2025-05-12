@@ -84,25 +84,21 @@ while True:
                 while True:
                     while show_state:
                         os.system('clear')
+                        logs = log_database.get_logs("ASC")
+                        for row in logs:
+                            print(row[3])
+                            if (row[3] =="TEST"):
+                                gr.append(row[4])
                         menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-                        print("x. Hovedmenu")
+                        print("DEVICES".center(60, "-"))
+                        menu.graph(gr, "OUTSIDE LIGHT")
+                        x = input("Indtast valg: ")
+                        if x == "x": 
+                            show_state = False
+                            break
                         time.sleep(1)
+
             
-            os.system('clear')
-            menu.data_menu(gardin_server.recieve, sensor_server.recieve, lys_server.message, gardin_server.message)
-            
-            log_database.save_log("INFO", "CHANGE", 3)
-            logs = log_database.get_logs("ASC")
-            for row in logs:
-                print(row[3])
-                if (row[3] =="TEST"):
-                    gr.append(row[4])
-            print("DEVICES".center(60, "-"))
-            menu.graph(gr, "OUTSIDE LIGHT")
-            x = input("Indtast valg: ")
-            if x == "x": 
-                show_state = False
-                break
     
 
 
