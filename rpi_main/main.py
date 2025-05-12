@@ -10,11 +10,9 @@ menu = Menu()
 
 db_path = os.path.join(os.path.dirname(__file__), "logs.db")
 log_database = Database(db_path)
-lys_server = Server(8061)
-gardin_server = Server(8062)
-sensor_server = Server(8063)
-
-
+lys_server = Server(8071)
+gardin_server = Server(8072)
+sensor_server = Server(8073)
 
 threading.Thread(target=lys_server.run, args=()).start()
 threading.Thread(target=gardin_server.run, args=()).start()
@@ -99,6 +97,8 @@ while True:
                     gr.append(row[4])
             print("DEVICES".center(60, "-"))
             menu.graph(gr, "OUTSIDE LIGHT")
+            
+            
             x = input("Indtast valg: ")
             if x == "x": 
                 show_state = False
