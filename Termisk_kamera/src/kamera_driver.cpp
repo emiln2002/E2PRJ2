@@ -24,23 +24,27 @@ bool kamera_driver::person_detected()
 
 
 bool kamera_driver::area_mode(){
-  getFrame(pixel_temps);
+  getFrame(pixel_temps); //tager billede
   int current_pixel_chain = 0;
-  for (size_t i = 0; i < 768; i++)
+  for (size_t i = 1; i <= 768-(32*(square_sidelength_-1)); i++) 
   {
     if(pixel_temps[i]> detecting_temp_){
       current_pixel_chain++;
-
     }
     else{
       current_pixel_chain = 0;
     }
     
     if(current_pixel_chain == square_sidelength_){
-      if(check_following_lines(i + 33 - square_sidelength_)){
+      if(check_following_lines(i + 33 - square_sidelength_)==true){
         return true;
       }
     }
+    
+    if(i%32==0){
+      current_pixel_chain = 0;
+    }
+
   }
   return false;
 }
