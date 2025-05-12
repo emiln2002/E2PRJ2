@@ -91,10 +91,12 @@ while True:
    
 # ----------------------Vis data -----------------------------
     elif x == "4":
-        show_state = True
-        x = input("Indtast valg: ")
-        if x == "x": 
-            show_state = False
+        while True:
+            show_state = True
+            x = input("Indtast valg: ")
+            if x == "x": 
+                show_state = False
+                break
             
             
     
