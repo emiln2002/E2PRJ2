@@ -11,6 +11,8 @@ light_sensor::light_sensor(int light_level, int threshold)
 int light_sensor::adjust_light()
 {
     int sensorvalue = analogRead(35); // 0 til 4096 
+    //while(sensorvalue < threshold_ - 50 || sensorvalue > threshold_ + 50){
+      //sensorvalue = analogRead(35);
       if ((sensorvalue < threshold_ - 50) && (light_level_ < 96))
       {
         light_level_ += 5;
@@ -19,5 +21,6 @@ int light_sensor::adjust_light()
       {
         light_level_ -= 5;
       }   
+   //}
     return light_level_;
 }
