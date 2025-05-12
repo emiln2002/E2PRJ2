@@ -93,17 +93,11 @@ class Menu:
         """
 
         print(title)
-        print("DEVICES".center(60, "-"))
         print(f"  Udelys:     {udelys}")
         print(f"  Indelys:    {indelys}")
         print(f"  Lys niveau: {lys}")
         print(f"  Gardin:     {gardin}")
-        
-        #gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
-        #self.graph(gr,"OUTSIDE LIGHT")
-        
-        print("-" * 60)
-        
+             
         
         
 # ----------------------graph----------------------
@@ -113,7 +107,7 @@ class Menu:
             li.append(0)
         while len(li) > 50:
             li.pop(0)
-        for x in lis:
+        for x in li:
             x = x/10
         
         print(("┌─" + "─" * len(name) + "─┐").center(60, " "))
@@ -125,8 +119,8 @@ class Menu:
         print("│")
         
         for x in reversed(range(1,11)):
-            if x == 10: print(f"│ {x}", end="│")
-            else: print(f"│  {x}", end="│")
+            if x == 10: print(f"│{x*10}", end="│")
+            else: print(f"│ {x*10}", end="│")
             for i in li:
                 if i==x: print("—", end="")
                 else: print(" ", end="")

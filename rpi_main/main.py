@@ -19,17 +19,15 @@ show_state = False
 def run_data():
     while True:
         while show_state:
-            os.system('clear')
             gr = []
+            os.system('clear')
             menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-            logs = log_database.get_logs("ASC")
+            logs = log_database.get_logs("ASC", 50)
             for row in logs:
                 if (row[3] =="OUTSIDE"):
                     gr.append(row[4])
-                    print(row[4])
-            print("DEVICES".center(60, "-"))
-            menu.graph(gr, "OUTSIDE LIGHT")
-            time.sleep(1)
+            menu.graph(gr, "UDELYS")
+            time.sleep(2)
 
 threading.Thread(target=lys_server.run, args=()).start()
 threading.Thread(target=gardin_server.run, args=()).start()
@@ -44,8 +42,8 @@ def run_auto():
             if int(gardin_server.receive) > 50:
                 gardin_server.set_message("1")
             else: gardin_server.set_message("0")
-        log_database.save_log("INFO","OUTSIDE",sensor_server.receive)
-        time.sleep(1)
+        log_database.save_log("INFO","OUTSIDE",gardin_server.receive)
+        time.sleep(2)
         
 threading.Thread(target=run_auto, args=()).start()
 
@@ -78,8 +76,17 @@ while True:
             elif x == "2":
                 os.system('clear')
                 menu.manuelt_menu(lys_server.message, gardin_server.message)
-                i = input("Indtast værdi for lys fra 0-100: ")
-                lys_server.set_message(i)
+                while True:
+                    try:
+                        i = int(input("Indtast værdi for lys fra 0-100: "))
+                        if 0 <= i <= 100:
+                            lys_server.set_message(str(i))
+                            break
+                        else:
+                            print("Ugyldig værdi, indtast ny")
+                                           
+                    except ValueError:
+                        print("Ugyldig værdi, indtast ny")
             elif x == "3": 
                 if gardin_server.message == ("1"):
                     gardin_server.set_message("0")
