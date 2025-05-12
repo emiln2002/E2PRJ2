@@ -43,7 +43,7 @@ def run_auto():
                 gardin_server.set_message("1")
             else: gardin_server.set_message("0")
         log_database.save_log("INFO","OUTSIDE",gardin_server.receive)
-        time.sleep(1)
+        time.sleep(2)
         
 threading.Thread(target=run_auto, args=()).start()
 
