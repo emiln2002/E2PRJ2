@@ -10,15 +10,29 @@ menu = Menu()
 
 db_path = os.path.join(os.path.dirname(__file__), "logs.db")
 log_database = Database(db_path)
-lys_server = Server(8061)
-gardin_server = Server(8062)
-sensor_server = Server(8063)
+lys_server = Server(8081)
+gardin_server = Server(8082)
+sensor_server = Server(8083)
+show_state = False
+gr = []
 
-
+def run_data():
+                while True:
+                    while show_state:
+                        os.system('clear')
+                        menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
+                        logs = log_database.get_logs("ASC")
+                        for row in logs:
+                            if (row[3] =="TEST"):
+                                gr.append(row[4])
+                        print("DEVICES".center(60, "-"))
+                        menu.graph(gr, "OUTSIDE LIGHT")
+                        time.sleep(1)
 
 threading.Thread(target=lys_server.run, args=()).start()
 threading.Thread(target=gardin_server.run, args=()).start()
 threading.Thread(target=sensor_server.run, args=()).start()
+threading.Thread(target=run_data, args=()).start()
 
 
 def run_auto():
@@ -77,27 +91,11 @@ while True:
    
 # ----------------------Vis data -----------------------------
     elif x == "4":
-        gr = []
         show_state = True
-        while True:
-            def run_data():
-                while True:
-                    while show_state:
-                        os.system('clear')
-                        logs = log_database.get_logs("ASC")
-                        for row in logs:
-                            print(row[3])
-                            if (row[3] =="TEST"):
-                                gr.append(row[4])
-                        menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-                        print("DEVICES".center(60, "-"))
-                        menu.graph(gr, "OUTSIDE LIGHT")
-                        x = input("Indtast valg: ")
-                        if x == "x": 
-                            show_state = False
-                            break
-                        time.sleep(1)
-
+        x = input("Indtast valg: ")
+        if x == "x": 
+            show_state = False
+            
             
     
 
