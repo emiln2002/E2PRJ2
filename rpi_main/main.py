@@ -14,16 +14,17 @@ lys_server = Server(8081)
 gardin_server = Server(8082)
 sensor_server = Server(8083)
 show_state = False
-gr = []
+
 
 def run_data():
     while True:
         while show_state:
             os.system('clear')
+            gr = []
             menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
             logs = log_database.get_logs("ASC")
             for row in logs:
-                if (row[3] =="TEST"):
+                if (row[3] =="OUTSIDE"):
                     gr.append(row[4])
             print("DEVICES".center(60, "-"))
             menu.graph(gr, "OUTSIDE LIGHT")
@@ -42,7 +43,8 @@ def run_auto():
             if int(gardin_server.receive) > 50:
                 gardin_server.set_message("1")
             else: gardin_server.set_message("0")
-            time.sleep(1)
+        log_database.save_log("INFO","OUTSIDE",sensor_server.receive)
+        time.sleep(1)
         
 threading.Thread(target=run_auto, args=()).start()
 
