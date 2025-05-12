@@ -28,7 +28,7 @@ def run_auto():
             gardin_server.set_message("1")
         else: gardin_server.set_message("0")
         
-threading.Thread(target=run_mode, args=()).start()
+threading.Thread(target=run_auto, args=()).start()
 
 while True:
     os.system('clear')
@@ -78,6 +78,7 @@ while True:
 # ----------------------Vis data -----------------------------
     elif x == "4":
         gr = []
+        show_state = True
         while True:
             def run_data():
                 while True:
@@ -99,7 +100,9 @@ while True:
             print("DEVICES".center(60, "-"))
             menu.graph(gr, "OUTSIDE LIGHT")
             x = input("Indtast valg: ")
-            if x == "x": break
+            if x == "x": 
+                show_state = False
+                break
     
 
 
