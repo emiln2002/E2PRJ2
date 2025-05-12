@@ -83,9 +83,13 @@ while True:
                             lys_server.set_message(str(i))
                             break
                         else:
+                            os.system('clear')
+                            menu.manuelt_menu(lys_server.message, gardin_server.message)
                             print("Ugyldig værdi, indtast ny")
                                            
                     except ValueError:
+                        os.system('clear')
+                        menu.manuelt_menu(lys_server.message, gardin_server.message)
                         print("Ugyldig værdi, indtast ny")
             elif x == "3": 
                 if gardin_server.message == ("1"):
