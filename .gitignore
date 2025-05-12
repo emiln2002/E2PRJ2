@@ -3,4 +3,6 @@
 .vscode/settings.json
 server_test/client/.vscode/extensions.json
 server_test/client/.vscode/settings.json
-
+logs.db
+__pyacache__/
+*.pyc

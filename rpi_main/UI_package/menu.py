@@ -30,8 +30,7 @@ class Menu:
             "  1. Skift mode",
             "  2. Styr lys manuelt",
             "  3. Styr lys autonomt",
-            "  4. Vis data",
-            "  5. Server log"
+            "  4. Vis data"
         )
 
         print(self.title)
@@ -91,18 +90,21 @@ class Menu:
         """
 
         print(title)
+<<<<<<< HEAD
         print("DEVICES".center(60, "-"))
         print(f"  Udelys:     {udelys}")
         print(f"  Indelys:    {indelys}")
         print(f"  Lys niveau: {lys}")
         print(f"  Gardin:     {gardin}")
+=======
+        print(f"Udelys: {udelys}")
+        print(f"Indelys: {indelys}")
+>>>>>>> origin/main
         
-        gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
-        self.graph(gr,"OUTSIDE LIGHT")
+        #gr = [5,5,4,4,5,4,3,2,2,1,2,3,4,5,6,7,8,9,10,10,10,9,9,8,8,7,7,6,6,5,5,6,5,4,4,3,2,3,4,5,6,6,6,5,5]
+        #self.graph(gr,"OUTSIDE LIGHT")
         
         print("-" * 60)
-        
-        
         
 # ----------------------graph----------------------
     def graph(self,lis:list,name):

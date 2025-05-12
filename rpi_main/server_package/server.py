@@ -5,7 +5,11 @@ class Server:
     def __init__(self, port):
         self.message = ""
         self.log = False
+<<<<<<< HEAD
         self.recieve = "-1"
+=======
+        self.receive = "-"
+>>>>>>> origin/main
 
         if self.log: print("server initialiseret")
         self.serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,7 +19,7 @@ class Server:
 
         if self.log: print(f"Server running on port {port}")
 
-    def set_massege(self, message:str):
+    def set_message(self, message:str):
         self.message = message
     
     def setLog(self, bo:bool):
@@ -47,7 +51,7 @@ class Server:
                         if self.log: print(f"Sent message: {self.message}")
                         time.sleep(0.1)  # Small delay to give client time to read the response
                         if msg != "":
-                            self.recieve = msg
+                            self.receive = msg
                         
                     # else:
                     #     if self.log: print("Unknown message. Ignoring.")
