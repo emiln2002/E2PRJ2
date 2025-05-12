@@ -80,7 +80,8 @@ while True:
             log_database.save_log("INFO", "CHANGE", 3)
             logs = log_database.get_logs("ASC")
             for row in logs:
-                if (row[3] == "INFO"):
+                print(row[3])
+                if (row[3] =="TEST"):
                     gr.append(row[4])
             print("DEVICES".center(60, "-"))
             menu.graph(gr, "OUTSIDE LIGHT")
