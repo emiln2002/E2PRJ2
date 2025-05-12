@@ -7,9 +7,13 @@ import time
 
 menu = Menu()
 
+
+db_path = os.path.join(os.path.dirname(__file__), "logs.db")
+log_database = Database(db_path)
 lys_server = Server(8061)
 gardin_server = Server(8062)
 sensor_server = Server(8063)
+
 
 
 threading.Thread(target=lys_server.run, args=()).start()
@@ -24,7 +28,7 @@ def run_mode():
             gardin_server.set_message("1")
         else: gardin_server.set_message("0")
         
-threading.Thread(target=run_auto, args=()).start()
+threading.Thread(target=run_mode, args=()).start()
 
 while True:
     os.system('clear')
@@ -79,11 +83,10 @@ while True:
                 while True:
                     while show_state:
                         os.system('clear')
-                        menu.data_menu(gardin_server.recieve, sensor_server.recieve, lys_server.message, gardin_server.message)
+                        menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
                         print("x. Hovedmenu")
                         time.sleep(1)
             
-            os.system('clear')
             menu.data_menu(gardin_server.receive,sensor_server.receive)
             log_database.save_log("INFO", "CHANGE", 3)
             logs = log_database.get_logs("ASC")
