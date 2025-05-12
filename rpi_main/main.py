@@ -76,8 +76,17 @@ while True:
             elif x == "2":
                 os.system('clear')
                 menu.manuelt_menu(lys_server.message, gardin_server.message)
-                i = input("Indtast værdi for lys fra 0-100: ")
-                lys_server.set_message(i)
+                while True:
+                    try:
+                        i = input("Indtast værdi for lys fra 0-100: ")
+                        if 0 <= i <= 100:
+                            lys_server.set_message(i)
+                            break
+                        else:
+                            print("Ugyldig værdi, indtast ny")
+                                           
+                    except ValueError:
+                        print("Ugyldig værdi, indtast ny")
             elif x == "3": 
                 if gardin_server.message == ("1"):
                     gardin_server.set_message("0")
