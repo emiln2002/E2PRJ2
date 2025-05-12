@@ -18,13 +18,15 @@ threading.Thread(target=lys_server.run, args=()).start()
 threading.Thread(target=gardin_server.run, args=()).start()
 threading.Thread(target=sensor_server.run, args=()).start()
 
-
 def run_auto():
-    while menu.mode == "Auto":
-        lys_server.set_message(sensor_server.receive)
-        if int(gardin_server.receive) > 50:
-            gardin_server.set_message("1")
-        else: gardin_server.set_message("0")
+    while True:
+        while menu.get_mode() == "Auto":
+            # print("Auto mode running")
+            lys_server.set_message(sensor_server.recieve)
+            if int(gardin_server.recieve) > 50:
+                gardin_server.set_message("1")
+            else: gardin_server.set_message("0")
+            time.sleep(1)
         
 threading.Thread(target=run_auto, args=()).start()
 
