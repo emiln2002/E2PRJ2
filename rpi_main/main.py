@@ -3,14 +3,13 @@ from server_package import Server
 from Database_package import Database
 import os
 import threading
-import array
+import time
 
 menu = Menu()
-db_path = os.path.join(os.path.dirname(__file__), "logs.db")
-lys_server = Server(8081)
-gardin_server = Server(8082)
-sensor_server = Server(8083)
-log_database = Database(db_path)
+
+lys_server = Server(8061)
+gardin_server = Server(8062)
+sensor_server = Server(8063)
 
 
 threading.Thread(target=lys_server.run, args=()).start()
@@ -25,7 +24,7 @@ def run_mode():
             gardin_server.set_message("1")
         else: gardin_server.set_message("0")
         
-threading.Thread(target=run_mode, args=()).start()
+threading.Thread(target=run_auto, args=()).start()
 
 while True:
     os.system('clear')
@@ -33,6 +32,8 @@ while True:
     x = input("Indtast valg: ")
     if x == "x":
         lys_server.setLog(False)
+        gardin_server.setLog(False)
+        sensor_server.setLog(False)
         os.system('clear')
         menu.main_menu()
     elif x == "1":
@@ -74,6 +75,13 @@ while True:
     elif x == "4":
         gr = []
         while True:
+            def run_data():
+                while True:
+                    while show_state:
+                        os.system('clear')
+                        menu.data_menu(gardin_server.recieve, sensor_server.recieve, lys_server.message, gardin_server.message)
+                        print("x. Hovedmenu")
+                        time.sleep(1)
             
             os.system('clear')
             menu.data_menu(gardin_server.receive,sensor_server.receive)
