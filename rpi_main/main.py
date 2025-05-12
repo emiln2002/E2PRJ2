@@ -6,9 +6,9 @@ import time
 
 menu = Menu()
 
-lys_server = Server(8085)
-gardin_server = Server(8087)
-sensor_server = Server(8084)
+lys_server = Server(8061)
+gardin_server = Server(8062)
+sensor_server = Server(8063)
 
 
 threading.Thread(target=lys_server.run, args=()).start()
