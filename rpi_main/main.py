@@ -21,10 +21,10 @@ threading.Thread(target=gardin_server.run, args=()).start()
 threading.Thread(target=sensor_server.run, args=()).start()
 
 
-def run_mode():
+def run_auto():
     while menu.mode == "Auto":
         lys_server.set_message(sensor_server.receive)
-        if gardin_server.receive > 50:
+        if int(gardin_server.receive) > 50:
             gardin_server.set_message("1")
         else: gardin_server.set_message("0")
         
@@ -87,7 +87,9 @@ while True:
                         print("x. Hovedmenu")
                         time.sleep(1)
             
-            menu.data_menu(gardin_server.receive,sensor_server.receive)
+            os.system('clear')
+            menu.data_menu(gardin_server.recieve, sensor_server.recieve, lys_server.message, gardin_server.message)
+            
             log_database.save_log("INFO", "CHANGE", 3)
             logs = log_database.get_logs("ASC")
             for row in logs:
