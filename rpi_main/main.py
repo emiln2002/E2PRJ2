@@ -17,9 +17,9 @@ show_state = False
 
 
 def run_data():
+    gr = []
     while True:
         while show_state:
-            gr = []
             os.system('clear')
             menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
             logs = log_database.get_logs("DESC", 1)
