@@ -32,7 +32,7 @@ class Database:
         conn.close()
 
     # Funktion til at vise alle logs
-    def get_logs(self, order, limit, log_type):
+    def get_logs(self, order, limit):
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
         c.execute(f"SELECT * FROM logs ORDER BY timestamp {order} LIMIT {limit} ")
