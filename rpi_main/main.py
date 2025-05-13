@@ -22,7 +22,7 @@ def run_data():
             gr = []
             os.system('clear')
             menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-            logs = log_database.get_logs("DESC", 50)
+            logs = log_database.get_logs("DESC", 100)
             for row in logs:
                 if (row[3] =="OUTSIDE"):
                     gr.append(row[4])
