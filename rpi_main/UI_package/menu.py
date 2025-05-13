@@ -107,7 +107,9 @@ class Menu:
             li.append(0)
         while len(li) > 50:
             li.pop(0)
-        li = [x / 10 for x in li]
+        l = []
+        for x in li:
+            l.append(int(x/10))
         
         print(("┌─" + "─" * len(name) + "─┐").center(60, " "))
         print("┌", end="")
@@ -120,7 +122,7 @@ class Menu:
         for x in reversed(range(1,11)):
             if x == 10: print(f"│{x*10}", end="│")
             else: print(f"│ {x*10}", end="│")
-            for i in li:
+            for i in l:
                 if i==x: print("—", end="")
                 else: print(" ", end="")
             print("    │")
