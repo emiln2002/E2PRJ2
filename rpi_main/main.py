@@ -17,14 +17,15 @@ show_state = False
 
 
 def run_data():
-    gr = []
     while True:
         while show_state:
+            gr = []
             os.system('clear')
             menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-            logs = log_database.get_logs("DESC", 50, "OUTSIDE")
+            logs = log_database.get_logs("DESC", 50)
             for row in logs:
-                gr.append(row[4])
+                if (row[3] =="OUTSIDE"):
+                    gr.append(row[4])
             menu.graph(gr, "UDELYS")
             time.sleep(2)
 
