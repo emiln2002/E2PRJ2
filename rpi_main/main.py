@@ -22,7 +22,7 @@ def run_data():
             gr = []
             os.system('clear')
             menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-            logs = log_database.get_logs("ASC", 50)
+            logs = log_database.get_logs("DESC", 100)
             for row in logs:
                 if (row[3] =="OUTSIDE"):
                     gr.append(row[4])
@@ -39,10 +39,13 @@ def run_auto():
         while menu.get_mode() == "Auto":
             # print("Auto mode running")
             lys_server.set_message(sensor_server.receive)
+            log_database.save_log("INFO","OUTSIDE",gardin_server.receive)
+            log_database.save_log("INFO","INSIDE",lys_server.receive)
             if int(gardin_server.receive) > 50:
                 gardin_server.set_message("1")
             else: gardin_server.set_message("0")
         log_database.save_log("INFO","OUTSIDE",gardin_server.receive)
+        log_database.save_log("INFO","INSIDE",lys_server.receive)
         time.sleep(2)
         
 threading.Thread(target=run_auto, args=()).start()

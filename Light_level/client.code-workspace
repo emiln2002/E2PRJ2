@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "../client"
+		},
+		{
+			"path": "../light_control"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../Light_struct"
+		},
+		{
+			"path": "../rpi main"
+		},
+		{
+			"path": "../rpi_main"
+		},
+		{
+			"path": "../server_test"
+		},
+		{
+			"path": "../wifi_client"
+		}
+	]
+}
