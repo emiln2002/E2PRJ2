@@ -22,10 +22,9 @@ def run_data():
         while show_state:
             os.system('clear')
             menu.data_menu(gardin_server.receive, sensor_server.receive, lys_server.message, gardin_server.message)
-            logs = log_database.get_logs("DESC", 2)
+            logs = log_database.get_logs("DESC", 50, "OUTSIDE")
             for row in logs:
-                if (row[3] =="OUTSIDE"):
-                    gr.append(row[4])
+                gr.append(row[4])
             menu.graph(gr, "UDELYS")
             time.sleep(2)
 
