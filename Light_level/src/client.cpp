@@ -1,7 +1,7 @@
 #include "client.h"
 
 client::client(const int port, const char *host_ip, const char *ssid): port(port), host_ip(host_ip), ssid(ssid){
-    Serial.begin(9600);
+    Serial.begin(115200);
 
     
     WiFi.begin(ssid);
