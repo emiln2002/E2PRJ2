@@ -15,7 +15,7 @@ void setup() {
 
   kamera_driver kamera1(28, 30, 3, 0x33); //Jeg har ændret adressen
 
-  int threshold = 450; // skal testes
+  int threshold = 1000; // skal testes
 
   light_sensor light1(50, threshold);
   
@@ -58,14 +58,12 @@ void setup() {
     c.read();
   }
 
-  
-
-  
 }
 
 void loop() {
 
 }
+
 
 
 

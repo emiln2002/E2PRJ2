@@ -8,7 +8,6 @@
 
 bool kamera_driver::person_detected()
 {
-    // float temperaturer[768];
     getFrame(pixel_temps); 
     int count = 0;
     for (size_t i = 0; i < 768; i++)
