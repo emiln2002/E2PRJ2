@@ -108,7 +108,7 @@ class Menu:
         while len(li) > 50:
             li.pop(0)
         for x in li:
-            x = li/10
+            li = x/10
         
         print(("┌─" + "─" * len(name) + "─┐").center(60, " "))
         print("┌", end="")
