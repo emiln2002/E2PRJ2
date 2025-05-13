@@ -3,7 +3,7 @@
 #include "client.h"
 #include <iostream>
 
-#define SPREDNING 100
+#define SPREDNING 40
 
 light_sensor::light_sensor(int light_level, int threshold)
 {
@@ -15,7 +15,7 @@ int light_sensor::adjust_light()
 {
   int sensorvalue = analogRead(35); // 0 til 4096 
    
-  std::cout << "Sensorvalue: " <<std::to_string(sensorvalue) << std::endl;
+  std::cout << "Sensorvalue: " << std::to_string(sensorvalue) << std::endl;
       
   if ((sensorvalue < threshold_ - SPREDNING) && (light_level_ < 96))
   {
