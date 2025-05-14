@@ -9,6 +9,8 @@ private:
     int count_min_;
     float* pixel_temps = new float[768] {};
     int square_sidelength_; //sidelængde på kvadrat der tjekkes efter
+
+    bool check_following_lines(int start);
     
 public:
     kamera_driver(int detecting_temp, int count_min, int square_sidelength, int i2c_addr)
@@ -17,8 +19,7 @@ public:
     }
     bool person_detected();
     bool area_mode();
-    bool check_following_lines(int start);
-    //void screen_mode();
+    void screen_mode();
 };
 
 

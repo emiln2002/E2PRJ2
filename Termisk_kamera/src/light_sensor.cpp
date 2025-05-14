@@ -3,7 +3,7 @@
 #include "client.h"
 #include <iostream>
 
-#define SPREDNING 40
+#define SPREDNING 30
 
 light_sensor::light_sensor(int light_level, int threshold)
 {
@@ -13,7 +13,7 @@ light_sensor::light_sensor(int light_level, int threshold)
 
 int light_sensor::adjust_light()
 {
-  int sensorvalue = analogRead(35); // 0 til 4096 
+  int sensorvalue = analogRead(35); // 12bit - værdi fra 0 til 4096 
    
   std::cout << "Sensorvalue: " << std::to_string(sensorvalue) << std::endl;
       

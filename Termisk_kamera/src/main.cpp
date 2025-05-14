@@ -8,55 +8,35 @@
 
 
 void setup() {
-  //client c(8083, "10.42.0.1");
+  client c(8083, "10.42.0.1");
 
   Wire.begin();
-  Serial.begin(9600); //tilføjet igen for at se i terminal, ved ikke om det skal være der
+  Serial.begin(9600); //tilføjet for at se i terminal
 
-  kamera_driver kamera1(28, 30, 3, 0x33); //Jeg har ændret adressen
+  kamera_driver kamera1(28, 30, 3, 0x33); 
 
-  int threshold = 450; // skal testes
+  int threshold = 500;
 
   light_sensor light1(50, threshold);
   
   
   pinMode(35, INPUT);
-  int light_level = 50;
   
-
   analogReadResolution(12);
 
-
-  /*
-  while (1)
-  {
-    if (kamera1.person_detected() == 0)
-    {
-      std::cout << "No person detected" << std::endl;
-      //c.send(String(0));
-    }
-    else {
-      std::cout << "PERSON DETECTEDDDDDD" << std::endl;
-      //c.send(String(light1.adjust_light()));
-    }
-    //c.read();
-  }
-
-  */
 
   while (1)
   {
     if (kamera1.area_mode() == 0)
     {
       std::cout << "No person detected" << std::endl;
-      //c.send(String(0));
+      c.send(String(0));
     }
     else {
       std::cout << "PERSON DETECTEDDDDDD" << std::endl;
-      //c.send(String(light1.adjust_light()));
-      light1.adjust_light();
+      c.send(String(light1.adjust_light()));
     }
-    //c.read();
+    c.read();
   }
 
 }
