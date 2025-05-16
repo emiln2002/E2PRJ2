@@ -5,8 +5,8 @@
 
 
 
-
-bool kamera_driver::person_detected()
+/*
+bool kamera_driver::person_detected_vol1()
 {
   getFrame(pixel_temps); 
   int count = 0;
@@ -20,9 +20,10 @@ bool kamera_driver::person_detected()
   if (count > count_min_) {return true;}
   else {return false;}
 }
+  */
 
 
-bool kamera_driver::area_mode(){
+bool kamera_driver::person_detected(){
   getFrame(pixel_temps); //tager billede
   int current_pixel_chain = 0;
   for (size_t i = 1; i <= 768-(32*(square_sidelength_-1)); i++) 

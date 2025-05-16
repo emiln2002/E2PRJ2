@@ -6,6 +6,8 @@
 #include "client.h"
 #include "light_sensor.h"
 
+#define THRESHOLD 500
+
 
 void setup() {
   client c(8083, "10.42.0.1");
@@ -13,11 +15,10 @@ void setup() {
   Wire.begin();
   Serial.begin(9600); //tilføjet for at se i terminal
 
-  kamera_driver kamera1(28, 30, 3, 0x33); 
+  kamera_driver kamera1(28, 3, 0x33); 
 
-  int threshold = 500;
 
-  light_sensor light1(50, threshold);
+  light_sensor light1(50, THRESHOLD);
   
   
   pinMode(35, INPUT);
@@ -27,7 +28,7 @@ void setup() {
 
   while (1)
   {
-    if (kamera1.area_mode() == 0)
+    if (kamera1.person_detected() == 0)
     {
       std::cout << "No person detected" << std::endl;
       c.send(String(0));
