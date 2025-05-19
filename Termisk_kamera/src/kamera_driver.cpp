@@ -26,7 +26,7 @@ bool kamera_driver::person_detected_vol1()
 bool kamera_driver::person_detected(){
   getFrame(pixel_temps); //tager billede
   int current_pixel_chain = 0;
-  for (size_t i = 1; i <= 768-(32*(square_sidelength_-1)); i++) 
+  for (size_t i = 0; i < 768-(32*(square_sidelength_-1)); i++) 
   {
     if(pixel_temps[i]> detecting_temp_){
       current_pixel_chain++;
@@ -41,7 +41,7 @@ bool kamera_driver::person_detected(){
       }
     }
     
-    if(i%32==0){
+    if(i+1%32==0){
       current_pixel_chain = 0;
     }
 
